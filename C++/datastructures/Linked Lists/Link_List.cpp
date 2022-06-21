@@ -27,6 +27,7 @@ class Link_List {
     void delete_all();
     void reverse_link_list();
     void sort_list();
+    void remove_duplicates();
 };
 
 void Link_List::insert_at_the_begining(int val) {
@@ -237,6 +238,30 @@ void Link_List::delete_all() {
         }
     }
 }
+
+void Link_List::remove_duplicates() {
+    Node *ptr1, *ptr2, *dup;
+    if (head == NULL) {
+        std::cout << "LINK LIST EMPTY" << std::endl;
+        return;
+    } else {
+        ptr1 = head;
+        while (ptr1 != NULL && ptr1->next != NULL) {
+            ptr2 = ptr1;
+            while (ptr2->next != NULL) {
+                if (ptr1->data == ptr2->next->data) {
+                    dup = ptr2->next;
+                    ptr2->next = ptr2->next->next;
+                    delete dup;
+                } else {
+                    ptr2 = ptr2->next;
+                }
+            }
+            ptr1 = ptr1->next;
+        }
+    }
+}
+
 };  // namespace Data_Structures
 
 int main() {
@@ -257,6 +282,7 @@ int main() {
                      "\n9. Reverse link list."
                      "\n10. Sort the link list."
                      "\n11. Delete the entire link list."
+                     "\n12. Remove duplicates from the linked list."
                   << std::endl;
         std::cout << "Enter your option" << std::endl;
         std::cin >> choice;
@@ -331,7 +357,12 @@ int main() {
                 list.delete_all();
                 std::cout << "Entire link list Deleted" << std::endl;
                 break;
+
+            case 12:
+                list.remove_duplicates();
+                std::cout << "All Duplicates Removed" << std::endl;
+                break;
         }
-    } while (choice != 12);
+    } while (choice != 13);
     return 0;
 }
