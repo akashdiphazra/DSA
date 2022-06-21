@@ -21,7 +21,7 @@
                 "-g",
                 /* File_name or Directory name / File_name.cpp */
                 // "-Wno-unused-result"
-                "Test.cpp",
+                "C++/datastructures/Linked Lists/Link_List.cpp",
                 "-o",
                 /* program.exe */
                 "akash.exe"

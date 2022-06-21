@@ -24,6 +24,7 @@ class Link_List {
     void delete_begining();
     void delete_end();
     void delete_after(int val);
+    void delete_all();
     void reverse_link_list();
     void sort_list();
 };
@@ -222,6 +223,20 @@ void Link_List::sort_list() {
         }
     }
 }
+
+void Link_List::delete_all() {
+    if (head == NULL) {
+        std::cout << "LINK LIST EMPTY" << std::endl;
+        return;
+    } else {
+        Node *temp;
+        while (head != NULL) {
+            temp = head->next;
+            delete head;
+            head = temp;
+        }
+    }
+}
 };  // namespace Data_Structures
 
 int main() {
@@ -241,6 +256,7 @@ int main() {
                      "\n8. Delete after any element in the link list."
                      "\n9. Reverse link list."
                      "\n10. Sort the link list."
+                     "\n11. Delete the entire link list."
                   << std::endl;
         std::cout << "Enter your option" << std::endl;
         std::cin >> choice;
@@ -310,7 +326,12 @@ int main() {
                 list.sort_list();
                 std::cout << "Link List Sorted" << std::endl;
                 break;
+
+            case 11:
+                list.delete_all();
+                std::cout << "Entire link list Deleted" << std::endl;
+                break;
         }
-    } while (choice != 11);
+    } while (choice != 12);
     return 0;
 }
