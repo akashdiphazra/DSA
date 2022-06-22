@@ -16,8 +16,9 @@ class Graph {
     }
     void add_edge(int u, int v) {
         this->adjlists[u].push_back(v);
-        //     this->adjlists[v].push_back(u);
+        //     this->adjlists[v].push_back(u); /* For unordered graph */    
     }
+
     void print_graph() {
         for (int i = 0; i < vertices; i++) {
             std::cout << i << " ➡ ";
@@ -27,6 +28,7 @@ class Graph {
             std::cout << std::endl;
         }
     }
+
     bool is_cyclic(std::vector<std::vector<int>> adj, int s, int V,
                    std::vector<bool>& vis) {
         std::vector<int> parent(V, -1);
@@ -48,6 +50,7 @@ class Graph {
         }
         return false;
     }
+
     bool Check_Cycle() {
         std::vector<bool> visited(vertices, false);
         for (int i = 0; i < vertices; i++) {
