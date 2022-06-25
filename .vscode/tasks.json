@@ -21,7 +21,7 @@
                 "-g",
                 /* File_name or Directory name / File_name.cpp */
                 // "-Wno-unused-result"
-                "C++/Data Structures/Graphs/Check_Cycle.cpp",
+                "C++/Data Structures/Graphs/Weighted_Graph.cpp",
                 "-o",
                 /* program.exe */
                 "akash.exe"
