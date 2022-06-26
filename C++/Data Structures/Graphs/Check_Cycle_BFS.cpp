@@ -22,6 +22,16 @@ class Graph {
         this->adjlists[v].push_back(u); /* For undirected graph */
     }
 
+    void print_graph() {
+        for (int i = 0; i < vertices; i++) {
+            std::cout << i << " ➡ ";
+            for (auto v : adjlists[i]) {
+                std::cout << v << " ";
+            }
+            std::cout << std::endl;
+        }
+    }
+
     bool BFS_Iterative(std::vector<std::vector<int>> adj, int s, int vert,
                        std::vector<bool>& visited) {
         std::vector<int> parent(vert, -1);
