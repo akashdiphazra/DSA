@@ -1,13 +1,7 @@
 #include <algorithm>
-#include <array>
-#include <atomic>
 #include <iostream>
 #include <limits>
 #include <queue>
-#include <set>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
 #include <utility>
 #include <vector>
 constexpr int64_t INF = std::numeric_limits<int64_t>::max();
@@ -43,7 +37,6 @@ class Graph {
             pq;
 
         int src = 0;  // Taking vertex 0 as source
-
         // Create a vector for keys and initialize all
         // keys as infinite (INF)
         std::vector<int64_t> key(vertices, INF);
@@ -70,13 +63,12 @@ class Graph {
 
             // Traverse all adjacent of u
             for (auto x : adjlists[u]) {
-                // Get vertex label and weight of current adjacent
-                // of u.
+                // Get vertex label and weight of current adjacent of u.
                 int v = x.first;
                 int weight = x.second;
 
-                // If v is not in MST and weight of (u,v) is smaller
-                // than current key of v
+                // If v is not in MST and weight of (u,v) is smaller than
+                // current key of v
                 if (mst[v] == false && key[v] > weight) {
                     // Updating key of v
                     key[v] = weight;
@@ -87,8 +79,9 @@ class Graph {
         }
 
         // Print edges of MST using parent array
-        for (int i = 1; i < vertices; ++i)
+        for (int i = 1; i < vertices; ++i) {
             printf("%d ⬅➡ %d ➡ %lld\n", parent[i], i, key[i]);
+        }
     }
 };
 };  // namespace Minimum_Spanning_Tree

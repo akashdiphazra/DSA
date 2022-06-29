@@ -32,7 +32,6 @@ class Graph {
             }
         }
     }
-    void DFS_iterative(int startvetex) {}
 };
 };  // namespace Depth_First_Search_Recursive
 
