@@ -21,7 +21,7 @@
                 "-g",
                 /* File_name or Directory name / File_name.cpp */
                 // "-Wno-unused-result"
-                "C++/Data Structures/Graphs/Connected_Components.cpp",
+                "C++/Data Structures/Graphs/Kruskal_DSU.cpp",
                 "-o",
                 /* program.exe */
                 "akash.exe"
