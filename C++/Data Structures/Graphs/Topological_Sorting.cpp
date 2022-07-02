@@ -1,51 +1,69 @@
-#include <algorithm>
+#include <assert.h>
+
 #include <iostream>
+#include <stack>
 #include <vector>
 
-int number_of_vertices,
-    number_of_edges;  // For number of Vertices (V) and number of edges (E)
-std::vector<std::vector<int>> graph;
-std::vector<bool> visited;
-std::vector<int> topological_order;
+namespace Topological_Sort {
+class Graph {
+ private:
+    int vertices;
+    std::vector<std::vector<int>> adjlists;
 
-void dfs(int v) {
-    visited[v] = true;
-    for (int u : graph[v]) {
-        if (!visited[u]) {
-            dfs(u);
+ public:
+    Graph(int v) {
+        vertices = v;
+        adjlists.resize(v);
+    }
+
+    void add_edge(int u, int v) { adjlists[u].push_back(v); }
+
+    void print_graph() {
+        for (int i = 0; i < vertices; i++) {
+            std::cout << i << " ➡ ";
+            for (auto v : adjlists[i]) {
+                std::cout << v << " ";
+            }
+            std::cout << std::endl;
         }
     }
-    topological_order.push_back(v);
-}
 
-void topological_sort() {
-    visited.assign(number_of_vertices, false);
-    topological_order.clear();
-    for (int i = 0; i < number_of_vertices; ++i) {
-        if (!visited[i]) {
-            dfs(i);
+    void Depth_First_Search(std::vector<std::vector<int>> adj, int v,
+                            std::vector<bool>& visited, std::stack<int>& st) {
+        visited[v] = true;
+        for (auto u : adj[v]) {
+            if (!visited[u]) {
+                Depth_First_Search(adj, u, visited, st);
+            }
+        }
+        st.push(v);
+    }
+
+    void topological_sort() {
+        std::stack<int> mystack;
+        std::vector<bool> visited(vertices, false);
+        for (int i = 0; i < vertices; i++) {
+            if (!visited[i]) {
+                Depth_First_Search(adjlists, i, visited, mystack);
+            }
+        }
+        std::cout << "Topological Sort: ";
+        while (!mystack.empty()) {
+            std::cout << mystack.top() << " ";
+            mystack.pop();
         }
     }
-    reverse(topological_order.begin(), topological_order.end());
-}
+};
+};  // namespace Topological_Sort
 
 int main() {
-    std::cout
-        << "Enter the number of vertices and the number of directed edges\n";
-    std::cin >> number_of_vertices >> number_of_edges;
-    int x = 0, y = 0;
-    graph.resize(number_of_vertices, std::vector<int>());
-    for (int i = 0; i < number_of_edges; ++i) {
-        std::cin >> x >> y;
-        x--, y--;  // to convert 1-indexed to 0-indexed
-        graph[x].push_back(y);
-    }
-    topological_sort();
-    std::cout << "Topological Order : \n";
-    for (int v : topological_order) {
-        std::cout << v + 1
-                  << ' ';  // converting zero based indexing back to one based.
-    }
-    std::cout << '\n';
+    Topological_Sort::Graph g(6);
+    g.add_edge(5, 2);
+    g.add_edge(5, 0);
+    g.add_edge(4, 0);
+    g.add_edge(4, 1);
+    g.add_edge(2, 3);
+    g.add_edge(3, 1);
+    g.topological_sort();
     return 0;
 }
