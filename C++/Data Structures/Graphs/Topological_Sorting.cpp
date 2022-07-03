@@ -1,6 +1,7 @@
 #include <assert.h>
 
 #include <iostream>
+#include <queue>
 #include <stack>
 #include <vector>
 
@@ -47,10 +48,45 @@ class Graph {
                 Depth_First_Search(adjlists, i, visited, mystack);
             }
         }
-        std::cout << "Topological Sort: ";
+        std::cout << "\nTopological Sort: ";
         while (!mystack.empty()) {
             std::cout << mystack.top() << " ";
             mystack.pop();
+        }
+    }
+
+    void Kahn_Algorithm() {
+        std::vector<int> indgree(vertices, 0);
+        std::queue<int> myqueue;
+        for (int u = 0; u < vertices; u++) {
+            for (auto it : adjlists[u]) {
+                indgree[it]++;
+            }
+        }
+        for (int i = 0; i < vertices; i++) {
+            if (indgree[i] == 0) {
+                myqueue.push(i);
+            }
+        }
+        int count = 0;
+        std::vector<int> toporder;
+        while (!myqueue.empty()) {
+            int u = myqueue.front();
+            myqueue.pop();
+            toporder.push_back(u);
+            for (auto it : adjlists[u]) {
+                if (!(--indgree[it])) {
+                    myqueue.push(it);
+                }
+                count++;
+            }
+        }
+        if (count != vertices) {
+            return;
+        }
+        std::cout << "\nTopological Sort: ";
+        for (uint_fast64_t i = 0; i < toporder.size(); i++) {
+            std::cout << toporder[i] << " ";
         }
     }
 };
@@ -64,6 +100,6 @@ int main() {
     g.add_edge(4, 1);
     g.add_edge(2, 3);
     g.add_edge(3, 1);
-    g.topological_sort();
+    g.Kahn_Algorithm();
     return 0;
 }
