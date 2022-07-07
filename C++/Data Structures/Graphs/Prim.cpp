@@ -36,23 +36,13 @@ class Graph {
                             std::greater<std::pair<int, int>>>
             pq;
 
-        int src = 0;  // Taking vertex 0 as source
-        // Create a vector for keys and initialize all
-        // keys as infinite (INF)
+        int src = 0;
         std::vector<int64_t> key(vertices, INF);
-
-        // To store parent array which in turn store MST
         std::vector<int> parent(vertices, -1);
-
-        // To keep track of vertices included in MST
         std::vector<bool> mst(vertices, false);
-
-        // Insert source itself in priority queue and initialize
-        // its key as 0.
         pq.push(std::make_pair(0, src));
         key[src] = 0;
 
-        /* Looping till priority queue becomes empty */
         while (!pq.empty()) {
             int u = pq.top().second;
             pq.pop();
@@ -60,25 +50,16 @@ class Graph {
                 continue;
             }
             mst[u] = true;  // Include vertex in MST
-
-            // Traverse all adjacent of u
             for (auto x : adjlists[u]) {
-                // Get vertex label and weight of current adjacent of u.
                 int v = x.first;
                 int weight = x.second;
-
-                // If v is not in MST and weight of (u,v) is smaller than
-                // current key of v
                 if (mst[v] == false && key[v] > weight) {
-                    // Updating key of v
                     key[v] = weight;
                     pq.push(std::make_pair(key[v], v));
                     parent[v] = u;
                 }
             }
         }
-
-        // Print edges of MST using parent array
         for (int i = 1; i < vertices; ++i) {
             printf("%d ⬅➡ %d ➡ %lld\n", parent[i], i, key[i]);
         }
