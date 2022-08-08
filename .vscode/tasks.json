@@ -21,7 +21,7 @@
                 "-g",
                 /* File_name or Directory name / File_name.cpp */
                 // "-Wno-unused-result"
-                "C++/Data Structures/Graphs/Bipartite_Graph.cpp",
+                "C++/Data Structures/Graphs/Graph_Adjacent_Matrix.cpp",
                 "-o",
                 /* program.exe */
                 "akash.exe"
