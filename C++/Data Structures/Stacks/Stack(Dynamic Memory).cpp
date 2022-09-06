@@ -51,6 +51,7 @@ int main() {
         } else if (ch == 2) {
             pop();
         } else if (ch == 3) {
+            std::cout << "STACK" << std::endl;
             show();
         } else if (ch == 4) {
             topmost();
