@@ -11,6 +11,7 @@ class Stack {
         stack_size = n;
         stack = new int[stack_size];
     }
+
     void push(int x) {
         if (top == stack_size - 1) {
             std::cout << "\nOverflow" << std::endl;
