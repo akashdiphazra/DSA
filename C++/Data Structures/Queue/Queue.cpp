@@ -15,7 +15,7 @@ class Array_Queue {
     void display();
 };
 
-void Array_Queue::enqueue(const int64_t &data) {
+void Array_Queue::enqueue(const int &data) {
     if (rear == queue.size() - 1) {
         std::cout << "\nStack is Full" << std::endl;
     } else if (front == -1 && rear == -1) {
