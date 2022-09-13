@@ -56,8 +56,8 @@ int main() {
     int op{0}, data{0};
     data_structures::Array_Queue ob;
     do {
-        std::cout << "\n\n1. enqueue(Insertion) "
-                     "\n2. dequeue(Deletion)"
+        std::cout << "\n\n1. Enqueue(Insertion) "
+                     "\n2. Dequeue(Deletion)"
                      "\n3. Display"
                      "\n4. Exit"
                      "\nEnter your choice "
