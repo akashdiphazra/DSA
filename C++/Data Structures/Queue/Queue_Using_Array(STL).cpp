@@ -5,8 +5,7 @@
 namespace data_structures {
 class Array_Queue {
  private:
-    int64_t front{-1};
-    int64_t rear{-1};
+    int64_t front{-1}, rear{-1};
     std::array<int64_t, max_size> queue;
 
  public:

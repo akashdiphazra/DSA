@@ -5,8 +5,7 @@ class Dynamic_Queue {
  private:
     int *queue;
     int queue_size;
-    int64_t front{-1};
-    int64_t rear{-1};
+    int64_t front{-1}, rear{-1};
 
  public:
     Dynamic_Queue(int size) {
