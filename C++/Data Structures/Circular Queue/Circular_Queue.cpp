@@ -63,7 +63,14 @@ class Circular_Queue {
         }
         std::cout << std::endl;
     }
-    void peek();
+
+    int peek() {
+        if (front == -1 && rear == -1) {
+            std::cout << "\nCircular Queue is Empty" << std::endl;
+        } else {
+            return circular_queue[front];
+        }
+    }
 };
 
 int main() {
@@ -73,9 +80,10 @@ int main() {
     Circular_Queue cq(size);
     do {
         std::cout << "\n1. Enqueue(Insertion) "
-                     "\n2. Dequeue(Deletion)"
-                     "\n3. Display"
-                     "\n4. Exit"
+                     "\n2. Dequeue(Deletion) "
+                     "\n3. Display "
+                     "\n4. Peek "
+                     "\n5. Exit "
                      "\nEnter your choice "
                   << std::endl;
         std::cin >> op;
