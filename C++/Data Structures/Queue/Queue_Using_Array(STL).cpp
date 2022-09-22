@@ -73,10 +73,6 @@ int main() {
             }
         } else if (op == 3) {
             ob.display();
-        } else if (op == 4) {
-            exit(0);
-        } else {
-            std::cout << "\nWrong choice ";
         }
     } while (op != 4);
     return 0;

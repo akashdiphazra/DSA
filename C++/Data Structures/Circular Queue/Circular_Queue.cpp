@@ -65,11 +65,13 @@ class Circular_Queue {
     }
 
     int peek() {
+        int data = 0;
         if (front == -1 && rear == -1) {
             std::cout << "\nCircular Queue is Empty" << std::endl;
         } else {
-            return circular_queue[front];
+            data = circular_queue[front];
         }
+        return data;
     }
 };
 
@@ -99,10 +101,9 @@ int main() {
         } else if (op == 3) {
             cq.display();
         } else if (op == 4) {
-            exit(0);
-        } else {
-            std::cout << "\nWrong choice ";
+            data = cq.peek();
+            std::cout << "\n First Value of the Queue: " << data << std::endl;
         }
-    } while (op != 4);
+    } while (op != 5);
     return 0;
 }
