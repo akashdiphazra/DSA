@@ -11,6 +11,7 @@ class Node {
         next = NULL;
     }
 };
+
 class Link_List {
  private:
     Node *head;
