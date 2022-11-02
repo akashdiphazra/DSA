@@ -1,0 +1,61 @@
+#include <assert.h>
+
+#include <array>
+#include <iostream>
+#include <vector>
+
+namespace Dynamic_Programming {
+class Knapsack {
+ public:
+    template <size_t n>
+    int max_knapsack_value(const int capacity,
+                           const std::array<int, n> &weights,
+                           const std::array<int, n> &values) {
+        std::vector<std::vector<int>> max_value(
+            n + 1, std::vector<int>(capacity + 1, 0));
+
+        int items = sizeof(weights) / sizeof(weights[0]);
+        for (int_fast64_t i{}; i < items + 1; ++i) {
+            for (int_fast64_t j{}; j < capacity + 1; ++j) {
+                if (i == 0 || j == 0) {
+                    max_value[i][j] = 0;
+                } else if (weights[i - 1] <= j) {
+                    int profit1 =
+                        values[i - 1] + max_value[i - 1][j - weights[i - 1]];
+
+                    int profit2 = max_value[i - 1][j];
+
+                    max_value[i][j] = std::max(profit1, profit2);
+
+                } else {
+                    max_value[i][j] = max_value[i - 1][j];
+                }
+            }
+        }
+        return max_value[items][capacity];
+    }
+};
+};  // namespace Dynamic_Programming
+
+void test() {
+    const int n1 = 3;
+    const int capacity1 = 50;
+    std::array<int, n1> weight1 = {10, 20, 30};   // weight of each item
+    std::array<int, n1> value1 = {60, 100, 120};  // value of each item
+    Dynamic_Programming::Knapsack k1;
+    assert(k1.max_knapsack_value(capacity1, weight1, value1) == 220);
+    std::cout << "TEST CASE 1 : PASSED" << std::endl;
+
+    const int n2 = 4;
+    const int capacity2 = 25;
+    std::array<int, n2> weight2 = {24, 10, 10, 7};  // weight of each item
+    std::array<int, n2> value2 = {24, 18, 18, 10};  // value of each item
+    Dynamic_Programming::Knapsack k2;
+    assert(k2.max_knapsack_value(capacity2, weight2, value2) == 36);
+    std::cout << "TEST CASE 2 : PASSED" << std::endl;
+}
+
+int main() {
+    test();
+    return 0;
+}
