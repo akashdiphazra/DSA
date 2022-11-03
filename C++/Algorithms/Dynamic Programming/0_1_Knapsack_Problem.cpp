@@ -102,7 +102,7 @@ void test2() {
 int main() {
     std::cout << "Knapsack Iterative" << std::endl;
     test1();
-    std::cout << "\nKnapsack Recursive" << std::endl;
+    std::cout << "Knapsack Recursive" << std::endl;
     test2();
     return 0;
 }
