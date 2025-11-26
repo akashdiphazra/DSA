@@ -3,7 +3,7 @@
 
 // Node structure for integer linked list
 class __Node__ {
- public:
+public:
   int data;
   std::shared_ptr<__Node__> next;
 
@@ -12,10 +12,10 @@ class __Node__ {
 
 // Circular LinkedList class
 class CircularLinkedList {
- private:
+private:
   std::shared_ptr<__Node__> head;
 
- public:
+public:
   CircularLinkedList() : head(nullptr) {}
 
   // Insert node at the beginning (returns new head)
@@ -23,7 +23,7 @@ class CircularLinkedList {
     auto new_node = std::make_shared<__Node__>(value);
     if (!head) {
       head = new_node;
-      new_node->next = head;  // Make it circular
+      new_node->next = head; // Make it circular
     } else {
       new_node->next = head;
       auto temp = head;
@@ -31,7 +31,7 @@ class CircularLinkedList {
         temp = temp->next;
       }
       temp->next = new_node;
-      head = new_node;  // New node becomes the head
+      head = new_node; // New node becomes the head
     }
   }
 
@@ -40,14 +40,14 @@ class CircularLinkedList {
     auto new_node = std::make_shared<__Node__>(value);
     if (!head) {
       head = new_node;
-      new_node->next = head;  // Make it circular
+      new_node->next = head; // Make it circular
     } else {
       auto temp = head;
       while (temp->next != head) {
         temp = temp->next;
       }
       temp->next = new_node;
-      new_node->next = head;  // Make it circular
+      new_node->next = head; // Make it circular
     }
   }
 
@@ -71,9 +71,10 @@ class CircularLinkedList {
   }
 
   // Merge two circular linked lists
-  void __Merge__(CircularLinkedList& other) {
+  void __Merge__(CircularLinkedList &other) {
     if (!head) {
-      head = other.head;  // If the first list is empty, just take the second list
+      head =
+          other.head; // If the first list is empty, just take the second list
       return;
     }
 
@@ -86,7 +87,8 @@ class CircularLinkedList {
     // Append the second list to the end of the first list
     temp->next = other.head;
 
-    // Make it circular again by connecting the last node of the second list to the head
+    // Make it circular again by connecting the last node of the second list to
+    // the head
     auto other_temp = other.head;
     while (other_temp->next != other.head) {
       other_temp = other_temp->next;
@@ -110,14 +112,14 @@ class CircularLinkedList {
     }
 
     if (head->next == head) {
-      head = nullptr;  // If there's only one node, set head to nullptr
+      head = nullptr; // If there's only one node, set head to nullptr
     } else {
       auto temp = head;
       while (temp->next != head) {
         temp = temp->next;
       }
-      temp->next = head->next;  // Link the last node to the second node
-      head = head->next;  // Move the head to the second node
+      temp->next = head->next; // Link the last node to the second node
+      head = head->next;       // Move the head to the second node
     }
     std::cout << "\nDeleted from beginning.\n";
   }
@@ -130,13 +132,13 @@ class CircularLinkedList {
     }
 
     if (head->next == head) {
-      head = nullptr;  // If there's only one node, set head to nullptr
+      head = nullptr; // If there's only one node, set head to nullptr
     } else {
       auto temp = head;
       while (temp->next->next != head) {
         temp = temp->next;
       }
-      temp->next = head;  // Link the second last node to the head
+      temp->next = head; // Link the second last node to the head
     }
     std::cout << "\nDeleted from end.\n";
   }
@@ -145,7 +147,8 @@ class CircularLinkedList {
   int __Search_Element__(int target) const {
     int index = 0;
     auto temp = head;
-    if (!temp) return -1;
+    if (!temp)
+      return -1;
     do {
       if (temp->data == target) {
         return index;
@@ -171,8 +174,8 @@ class CircularLinkedList {
       curr = next;
     } while (curr != head);
 
-    head->next = prev;  // The last node should point to the new head
-    head = prev;  // New head is the last node
+    head->next = prev; // The last node should point to the new head
+    head = prev;       // New head is the last node
 
     std::cout << "\nCircular linked list reversed successfully.\n";
   }
@@ -189,7 +192,7 @@ class CircularLinkedList {
       if (temp->next != head) {
         std::swap(temp->data, temp->next->data);
       }
-      temp = temp->next->next;  // Skip two nodes to swap next pair
+      temp = temp->next->next; // Skip two nodes to swap next pair
     } while (temp != head && temp->next != head);
     std::cout << "\nPairwise swap completed.\n";
   }
