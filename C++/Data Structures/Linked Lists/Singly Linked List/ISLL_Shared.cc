@@ -3,7 +3,7 @@
 
 // Node structure for integer linked list
 class __Node__ {
- public:
+public:
   int data;
   std::shared_ptr<__Node__> next;
 
@@ -12,10 +12,10 @@ class __Node__ {
 
 // LinkedList class
 class LinkedList {
- private:
+private:
   std::shared_ptr<__Node__> head;
 
- public:
+public:
   LinkedList() : head(nullptr) {}
 
   // Insert node at the beginning (returns new head)
@@ -59,10 +59,10 @@ class LinkedList {
   }
 
   // Merge two sorted linked lists
-  void __Merge__(LinkedList& other) {
+  void __Merge__(LinkedList &other) {
     if (!head) {
       head =
-          other.head;  // If the first list is empty, just take the second list
+          other.head; // If the first list is empty, just take the second list
       return;
     }
 
@@ -169,14 +169,37 @@ class LinkedList {
       // Inner loop to check for duplicates
       while (inner->next) {
         if (inner->next->data == outer->data) {
-          inner->next = inner->next->next;  // Remove duplicate
+          inner->next = inner->next->next; // Remove duplicate
         } else {
-          inner = inner->next;  // Move inner pointer forward
+          inner = inner->next; // Move inner pointer forward
         }
       }
-      outer = outer->next;  // Move outer pointer forward
+      outer = outer->next; // Move outer pointer forward
     }
     std::cout << "\nDuplicates removed.\n";
+  }
+
+  // Insert node after a given node
+  void __Insert_After_Node__(int target, int value) {
+    // Traverse the list to find the target node
+    auto temp = head;
+    while (temp) {
+      if (temp->data == target) {
+        // Create a new node with the given value
+        auto new_node = std::make_shared<__Node__>(value);
+
+        // Insert the new node after the target node
+        // Point new node to the next node of the target
+        new_node->next = temp->next;
+        temp->next = new_node; // Point the target node to the new node
+
+        std::cout << "\nInserted " << value << " after " << target << ".\n";
+        return; // Done inserting, so we return
+      }
+      temp = temp->next;
+    }
+    // If we reached here, the target node was not found
+    std::cout << "\nNode with value " << target << " not found in the list.\n";
   }
 };
 

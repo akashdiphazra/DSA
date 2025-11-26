@@ -2,35 +2,35 @@
 
 // Node structure for integer linked list
 class __Node__ {
- public:
+public:
   int data;
-  __Node__* next;
+  __Node__ *next;
 
   __Node__(int value) : data(value), next(nullptr) {}
 };
 
 // LinkedList class
 class __Linked_List__ {
- private:
-  __Node__* head;
+private:
+  __Node__ *head;
 
- public:
+public:
   __Linked_List__() : head(nullptr) {}
 
   // Insert node at the beginning (returns new head)
   void __Insert_Beginning__(int value) {
-    __Node__* new_node = new __Node__(value);
+    __Node__ *new_node = new __Node__(value);
     new_node->next = head;
     head = new_node;
   }
 
   // Insert node at the end
   void __Insert_End__(int value) {
-    __Node__* new_node = new __Node__(value);
+    __Node__ *new_node = new __Node__(value);
     if (!head) {
       head = new_node;
     } else {
-      __Node__* temp = head;
+      __Node__ *temp = head;
       while (temp->next) {
         temp = temp->next;
       }
@@ -44,7 +44,7 @@ class __Linked_List__ {
       std::cout << "\nList is empty.\n";
       return;
     }
-    __Node__* temp = head;
+    __Node__ *temp = head;
     int size = 0;
     std::cout << "\nLinked List: [head]: ";
     while (temp) {
@@ -57,15 +57,15 @@ class __Linked_List__ {
   }
 
   // Merge two sorted linked lists
-  void __Merge__(__Linked_List__& other) {
+  void __Merge__(__Linked_List__ &other) {
     if (!head) {
       head =
-          other.head;  // If the first list is empty, just take the second list
-      other.head = nullptr;  // Clear the second list to prevent double-free
+          other.head; // If the first list is empty, just take the second list
+      other.head = nullptr; // Clear the second list to prevent double-free
       return;
     }
     // Traverse to the end of the current list (this list)
-    __Node__* temp = head;
+    __Node__ *temp = head;
     while (temp->next) {
       temp = temp->next;
     }
@@ -73,17 +73,17 @@ class __Linked_List__ {
     // Append the second list to the end of the first list
     temp->next = other.head;
     other.head =
-        nullptr;  // Avoid double-free by clearing the second list's head
+        nullptr; // Avoid double-free by clearing the second list's head
     std::cout << "\nMerged two lists.\n";
   }
 
   // Delete the entire list
   void __Delete_List__() {
-    __Node__* temp;
+    __Node__ *temp;
     while (head) {
       temp = head;
       head = head->next;
-      delete temp;  // Free memory of the node
+      delete temp; // Free memory of the node
     }
     std::cout << "\nLinked list deleted successfully.\n";
   }
@@ -94,9 +94,9 @@ class __Linked_List__ {
       std::cout << "\nList is empty. Nothing to delete.\n";
       return;
     }
-    __Node__* temp = head;
+    __Node__ *temp = head;
     head = head->next;
-    delete temp;  // Free memory of the node
+    delete temp; // Free memory of the node
     std::cout << "\nDeleted from beginning.\n";
   }
 
@@ -107,16 +107,16 @@ class __Linked_List__ {
       return;
     }
     if (!head->next) {
-      delete head;  // Free memory of the last node
+      delete head; // Free memory of the last node
       head = nullptr;
       std::cout << "\nDeleted from end.\n";
       return;
     }
-    __Node__* temp = head;
+    __Node__ *temp = head;
     while (temp->next && temp->next->next) {
       temp = temp->next;
     }
-    delete temp->next;  // Free memory of the last node
+    delete temp->next; // Free memory of the last node
     temp->next = nullptr;
     std::cout << "\nDeleted from end.\n";
   }
@@ -124,7 +124,7 @@ class __Linked_List__ {
   // Search for an element (returns index or -1)
   int __Search_Element__(int target) const {
     int index = 0;
-    __Node__* temp = head;
+    __Node__ *temp = head;
     while (temp) {
       if (temp->data == target) {
         return index;
@@ -154,7 +154,7 @@ class __Linked_List__ {
       std::cout << "\nList has fewer than two elements. No swap needed.\n";
       return;
     }
-    __Node__* temp = head;
+    __Node__ *temp = head;
     while (temp && temp->next) {
       // Swap the data of current node and the next node
       std::swap(temp->data, temp->next->data);
@@ -172,22 +172,39 @@ class __Linked_List__ {
       return;
     }
     // Outer loop to traverse the list
-    __Node__* outer = head;
+    __Node__ *outer = head;
     while (outer && outer->next) {
-      __Node__* inner = outer;
+      __Node__ *inner = outer;
       // Inner loop to check for duplicates
       while (inner->next) {
         if (inner->next->data == outer->data) {
-          __Node__* duplicate = inner->next;
-          inner->next = inner->next->next;  // Remove duplicate
-          delete duplicate;                 // Free memory of the removed node
+          __Node__ *duplicate = inner->next;
+          inner->next = inner->next->next; // Remove duplicate
+          delete duplicate;                // Free memory of the removed node
         } else {
-          inner = inner->next;  // Move inner pointer forward
+          inner = inner->next; // Move inner pointer forward
         }
       }
-      outer = outer->next;  // Move outer pointer forward
+      outer = outer->next; // Move outer pointer forward
     }
     std::cout << "\nDuplicates removed.\n";
+  }
+
+  // Insert a node after a given node
+  void __Insert_After_Node__(int target, int value) {
+    __Node__ *temp = head;
+    while (temp) {
+      if (temp->data == target) {
+        __Node__ *new_node = new __Node__(value);
+        new_node->next = temp->next;
+        temp->next = new_node;
+        std::cout << "\nNode with value " << value << " inserted after "
+                  << target << ".\n";
+        return;
+      }
+      temp = temp->next;
+    }
+    std::cout << "\nNode with value " << target << " not found.\n";
   }
 
   // Destructor to ensure all dynamically allocated memory is freed
