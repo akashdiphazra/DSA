@@ -178,7 +178,6 @@ public:
     __Node__ *prev = nullptr;
     __Node__ *curr = head;
     __Node__ *next = nullptr;
-    __Node__ *last = head;
 
     do {
       next = curr->next;

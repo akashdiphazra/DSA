@@ -17,6 +17,7 @@
 .DS_Store
 .AppleDouble
 .LSOverride
+.clangd
 ._*
 .Spotlight-V100
 .Trashes

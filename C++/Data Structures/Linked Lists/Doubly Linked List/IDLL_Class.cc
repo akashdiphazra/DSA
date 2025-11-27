@@ -2,10 +2,10 @@
 
 // Node structure for doubly linked list
 class __DNode__ {
- public:
+public:
   int data;
-  __DNode__* next;
-  __DNode__* prev;
+  __DNode__ *next;
+  __DNode__ *prev;
 
   // Constructor
   __DNode__(int value) : data(value), next(nullptr), prev(nullptr) {}
@@ -13,17 +13,17 @@ class __DNode__ {
 
 // Doubly Linked List class
 class __Doubly_Linked_List__ {
- private:
-  __DNode__* head;
-  __DNode__* tail;
+private:
+  __DNode__ *head;
+  __DNode__ *tail;
 
- public:
+public:
   // Constructor to initialize an empty list
   __Doubly_Linked_List__() : head(nullptr), tail(nullptr) {}
 
   // Insert node at the beginning
   void __Insert_Beginning__(int value) {
-    __DNode__* newNode = new __DNode__(value);
+    __DNode__ *newNode = new __DNode__(value);
     if (!head) {
       head = tail = newNode;
     } else {
@@ -35,7 +35,7 @@ class __Doubly_Linked_List__ {
 
   // Insert node at the end
   void __Insert_End__(int value) {
-    __DNode__* newNode = new __DNode__(value);
+    __DNode__ *newNode = new __DNode__(value);
     if (!tail) {
       head = tail = newNode;
     } else {
@@ -51,7 +51,7 @@ class __Doubly_Linked_List__ {
       std::cout << "\nList is empty.\n";
       return;
     }
-    __DNode__* temp = head;
+    __DNode__ *temp = head;
     std::cout << "\nDoubly Linked List: [head]: ";
     while (temp) {
       std::cout << "<--{" << temp->data << "}-->";
@@ -66,14 +66,14 @@ class __Doubly_Linked_List__ {
       std::cout << "\nList is empty. No duplicates to remove.\n";
       return;
     }
-    __DNode__* current = head;
+    __DNode__ *current = head;
     while (current) {
-      __DNode__* runner = current->next;
+      __DNode__ *runner = current->next;
       while (runner) {
         if (current->data == runner->data) {
           // Remove the duplicate node
           if (runner == tail) {
-            tail = runner->prev;  // Update tail if removing the last node
+            tail = runner->prev; // Update tail if removing the last node
           }
           if (runner->next) {
             runner->next->prev = runner->prev;
@@ -81,9 +81,9 @@ class __Doubly_Linked_List__ {
           if (runner->prev) {
             runner->prev->next = runner->next;
           }
-          __DNode__* temp = runner;
+          __DNode__ *temp = runner;
           runner = runner->next;
-          delete temp;  // Free the memory of the duplicate node
+          delete temp; // Free the memory of the duplicate node
         } else {
           runner = runner->next;
         }
@@ -94,8 +94,9 @@ class __Doubly_Linked_List__ {
   }
 
   // Merge another list into the current list
-  void __Merge__(__Doubly_Linked_List__& other) {
-    if (!other.head) return;  // No nodes to merge
+  void __Merge__(__Doubly_Linked_List__ &other) {
+    if (!other.head)
+      return; // No nodes to merge
 
     // If current list is empty, just set the current list's head and tail to
     // the other list
@@ -120,9 +121,9 @@ class __Doubly_Linked_List__ {
   // Delete the entire list
   void __Delete_List__() {
     while (head) {
-      __DNode__* temp = head;
+      __DNode__ *temp = head;
       head = head->next;
-      delete temp;  // Free memory of the node
+      delete temp; // Free memory of the node
     }
     tail = nullptr;
     std::cout << "\nDoubly linked list deleted successfully.\n";
@@ -134,7 +135,7 @@ class __Doubly_Linked_List__ {
       std::cout << "\nList is empty. Nothing to delete.\n";
       return;
     }
-    __DNode__* temp = head;
+    __DNode__ *temp = head;
     if (head == tail) {
       head = tail = nullptr;
     } else {
@@ -151,7 +152,7 @@ class __Doubly_Linked_List__ {
       std::cout << "\nList is empty. Nothing to delete.\n";
       return;
     }
-    __DNode__* temp = tail;
+    __DNode__ *temp = tail;
     if (head == tail) {
       head = tail = nullptr;
     } else {
@@ -165,7 +166,7 @@ class __Doubly_Linked_List__ {
   // Search for an element (returns index or -1)
   int __Search_Element__(int target) const {
     int index = 0;
-    __DNode__* temp = head;
+    __DNode__ *temp = head;
     while (temp) {
       if (temp->data == target) {
         return index;
@@ -178,9 +179,10 @@ class __Doubly_Linked_List__ {
 
   // Pairwise swap nodes by swapping their data
   void __Pairwise_Swap__() {
-    if (!head || !head->next) return;  // No need to swap if there's 0 or 1 node
+    if (!head || !head->next)
+      return; // No need to swap if there's 0 or 1 node
 
-    __DNode__* current = head;
+    __DNode__ *current = head;
     while (current && current->next) {
       // Swap data between the current node and the next node
       int temp = current->data;
@@ -195,10 +197,11 @@ class __Doubly_Linked_List__ {
 
   // Reverse the linked list
   void __Reverse_List__() {
-    if (!head) return;  // Nothing to reverse if list is empty
+    if (!head)
+      return; // Nothing to reverse if list is empty
 
-    __DNode__* current = head;
-    __DNode__* temp = nullptr;
+    __DNode__ *current = head;
+    __DNode__ *temp = nullptr;
 
     while (current != nullptr) {
       temp = current->prev;
@@ -210,6 +213,47 @@ class __Doubly_Linked_List__ {
       head = temp->prev;
     }
     std::cout << "\nDoubly linked list reversed successfully.\n";
+  }
+
+  // Insert a node after the node with the target value
+  void __Insert_After__(int targetValue, int newValue) {
+    // Search for the node with the target value
+    __DNode__ *targetNode = head;
+    while (targetNode) {
+      if (targetNode->data == targetValue) {
+        // Found the target node, insert the new node after it
+        __DNode__ *newNode = new __DNode__(newValue);
+
+        // Set the new node's next to the target node's next
+        newNode->next = targetNode->next;
+
+        // If the target node is not the last node, update the next node's prev
+        // pointer
+        if (targetNode->next) {
+          targetNode->next->prev = newNode;
+        }
+
+        // Set the target node's next to point to the new node
+        targetNode->next = newNode;
+
+        // Set the new node's prev pointer to the target node
+        newNode->prev = targetNode;
+
+        // If the target node is the last node, update the tail pointer
+        if (targetNode == tail) {
+          tail = newNode;
+        }
+
+        std::cout << "\nNode with value " << newValue
+                  << " inserted after node with value " << targetValue << ".\n";
+        return; // Exit after inserting the node
+      }
+      targetNode = targetNode->next;
+    }
+
+    // If the target node is not found
+    std::cout << "\nNode with value " << targetValue
+              << " not found in the list.\n";
   }
 
   // Destructor to ensure all dynamically allocated memory is freed
