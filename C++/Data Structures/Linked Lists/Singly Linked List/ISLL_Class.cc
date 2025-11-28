@@ -2,7 +2,7 @@
 
 // Node structure for integer linked list
 class __Node__ {
-public:
+ public:
   int data;
   __Node__ *next;
 
@@ -11,10 +11,10 @@ public:
 
 // LinkedList class
 class __Linked_List__ {
-private:
+ private:
   __Node__ *head;
 
-public:
+ public:
   __Linked_List__() : head(nullptr) {}
 
   // Insert node at the beginning (returns new head)
@@ -60,8 +60,8 @@ public:
   void __Merge__(__Linked_List__ &other) {
     if (!head) {
       head =
-          other.head; // If the first list is empty, just take the second list
-      other.head = nullptr; // Clear the second list to prevent double-free
+          other.head;  // If the first list is empty, just take the second list
+      other.head = nullptr;  // Clear the second list to prevent double-free
       return;
     }
     // Traverse to the end of the current list (this list)
@@ -73,7 +73,7 @@ public:
     // Append the second list to the end of the first list
     temp->next = other.head;
     other.head =
-        nullptr; // Avoid double-free by clearing the second list's head
+        nullptr;  // Avoid double-free by clearing the second list's head
     std::cout << "\nMerged two lists.\n";
   }
 
@@ -83,7 +83,7 @@ public:
     while (head) {
       temp = head;
       head = head->next;
-      delete temp; // Free memory of the node
+      delete temp;  // Free memory of the node
     }
     std::cout << "\nLinked list deleted successfully.\n";
   }
@@ -96,7 +96,7 @@ public:
     }
     __Node__ *temp = head;
     head = head->next;
-    delete temp; // Free memory of the node
+    delete temp;  // Free memory of the node
     std::cout << "\nDeleted from beginning.\n";
   }
 
@@ -107,7 +107,7 @@ public:
       return;
     }
     if (!head->next) {
-      delete head; // Free memory of the last node
+      delete head;  // Free memory of the last node
       head = nullptr;
       std::cout << "\nDeleted from end.\n";
       return;
@@ -116,7 +116,7 @@ public:
     while (temp->next && temp->next->next) {
       temp = temp->next;
     }
-    delete temp->next; // Free memory of the last node
+    delete temp->next;  // Free memory of the last node
     temp->next = nullptr;
     std::cout << "\nDeleted from end.\n";
   }
@@ -179,13 +179,13 @@ public:
       while (inner->next) {
         if (inner->next->data == outer->data) {
           __Node__ *duplicate = inner->next;
-          inner->next = inner->next->next; // Remove duplicate
-          delete duplicate;                // Free memory of the removed node
+          inner->next = inner->next->next;  // Remove duplicate
+          delete duplicate;                 // Free memory of the removed node
         } else {
-          inner = inner->next; // Move inner pointer forward
+          inner = inner->next;  // Move inner pointer forward
         }
       }
-      outer = outer->next; // Move outer pointer forward
+      outer = outer->next;  // Move outer pointer forward
     }
     std::cout << "\nDuplicates removed.\n";
   }

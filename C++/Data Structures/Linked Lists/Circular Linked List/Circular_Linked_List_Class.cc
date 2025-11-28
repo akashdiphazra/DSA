@@ -2,7 +2,7 @@
 
 // Node structure for circular linked list
 class __Node__ {
-public:
+ public:
   int data;
   __Node__ *next;
 
@@ -11,17 +11,17 @@ public:
 
 // Circular LinkedList class
 class __Circular_Linked_List__ {
-private:
+ private:
   __Node__ *head;
 
-public:
+ public:
   __Circular_Linked_List__() : head(nullptr) {}
 
   // Insert node at the beginning (returns new head)
   void __Insert_Beginning__(int value) {
     __Node__ *new_node = new __Node__(value);
     if (!head) {
-      new_node->next = new_node; // Circular link to itself
+      new_node->next = new_node;  // Circular link to itself
       head = new_node;
     } else {
       new_node->next = head;
@@ -31,7 +31,7 @@ public:
         temp = temp->next;
       }
       temp->next = new_node;
-      head = new_node; // Update head
+      head = new_node;  // Update head
     }
   }
 
@@ -39,7 +39,7 @@ public:
   void __Insert_End__(int value) {
     __Node__ *new_node = new __Node__(value);
     if (!head) {
-      new_node->next = new_node; // Circular link to itself
+      new_node->next = new_node;  // Circular link to itself
       head = new_node;
     } else {
       __Node__ *temp = head;
@@ -47,7 +47,7 @@ public:
         temp = temp->next;
       }
       temp->next = new_node;
-      new_node->next = head; // Complete the circular link
+      new_node->next = head;  // Complete the circular link
     }
   }
 
@@ -64,7 +64,7 @@ public:
       std::cout << "-->{ " << temp->data << " } ";
       temp = temp->next;
       size++;
-    } while (temp != head); // Stop when we circle back to head
+    } while (temp != head);  // Stop when we circle back to head
     std::cout << " --> [head]";
     std::cout << "  Size: " << size << "\n";
   }
@@ -87,9 +87,9 @@ public:
     while (last_of_other->next != other.head) {
       last_of_other = last_of_other->next;
     }
-    last_of_other->next = head; // Complete the circular link
+    last_of_other->next = head;  // Complete the circular link
 
-    other.head = nullptr; // Avoid double free
+    other.head = nullptr;  // Avoid double free
     std::cout << "\nMerged two circular lists.\n";
   }
 
@@ -105,7 +105,7 @@ public:
       delete temp;
       temp = next_node;
     }
-    delete temp; // Delete the last node
+    delete temp;  // Delete the last node
     head = nullptr;
     std::cout << "\nCircular linked list deleted successfully.\n";
   }
@@ -117,7 +117,7 @@ public:
       return;
     }
     if (head->next == head) {
-      delete head; // Only one node in the list
+      delete head;  // Only one node in the list
       head = nullptr;
     } else {
       __Node__ *temp = head;
@@ -126,7 +126,7 @@ public:
         last = last->next;
       }
       head = head->next;
-      last->next = head; // Update last node's next pointer
+      last->next = head;  // Update last node's next pointer
       delete temp;
     }
     std::cout << "\nDeleted from beginning.\n";
@@ -147,7 +147,7 @@ public:
         temp = temp->next;
       }
       __Node__ *last = temp->next;
-      temp->next = head; // Update last node's next pointer
+      temp->next = head;  // Update last node's next pointer
       delete last;
     }
     std::cout << "\nDeleted from end.\n";
@@ -157,8 +157,7 @@ public:
   int __Search_Element__(int target) const {
     int index = 0;
     __Node__ *temp = head;
-    if (!temp)
-      return -1;
+    if (!temp) return -1;
     do {
       if (temp->data == target) {
         return index;
@@ -172,7 +171,7 @@ public:
   // Reverse the circular linked list
   void __Reverse_List__() {
     if (!head || head->next == head) {
-      return; // No need to reverse a single-node or empty list
+      return;  // No need to reverse a single-node or empty list
     }
 
     __Node__ *prev = nullptr;
@@ -186,8 +185,8 @@ public:
       curr = next;
     } while (curr != head);
 
-    head->next = prev; // Close the circle
-    head = prev;       // Update head to new first node
+    head->next = prev;  // Close the circle
+    head = prev;        // Update head to new first node
     std::cout << "\nCircular linked list reversed successfully.\n";
   }
 
@@ -244,8 +243,8 @@ public:
     do {
       if (temp->data == targetval) {
         __Node__ *new_node = new __Node__(newval);
-        new_node->next = temp->next; // Point the new node to the next node
-        temp->next = new_node;       // Point the target node to the new node
+        new_node->next = temp->next;  // Point the new node to the next node
+        temp->next = new_node;        // Point the target node to the new node
         std::cout << "\nInserted " << newval << " after " << targetval << ".\n";
         return;
       }

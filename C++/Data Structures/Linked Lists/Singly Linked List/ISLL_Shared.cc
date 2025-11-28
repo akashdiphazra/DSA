@@ -3,7 +3,7 @@
 
 // Node structure for integer linked list
 class __Node__ {
-public:
+ public:
   int data;
   std::shared_ptr<__Node__> next;
 
@@ -12,10 +12,10 @@ public:
 
 // LinkedList class
 class LinkedList {
-private:
+ private:
   std::shared_ptr<__Node__> head;
 
-public:
+ public:
   LinkedList() : head(nullptr) {}
 
   // Insert node at the beginning (returns new head)
@@ -62,7 +62,7 @@ public:
   void __Merge__(LinkedList &other) {
     if (!head) {
       head =
-          other.head; // If the first list is empty, just take the second list
+          other.head;  // If the first list is empty, just take the second list
       return;
     }
 
@@ -169,12 +169,12 @@ public:
       // Inner loop to check for duplicates
       while (inner->next) {
         if (inner->next->data == outer->data) {
-          inner->next = inner->next->next; // Remove duplicate
+          inner->next = inner->next->next;  // Remove duplicate
         } else {
-          inner = inner->next; // Move inner pointer forward
+          inner = inner->next;  // Move inner pointer forward
         }
       }
-      outer = outer->next; // Move outer pointer forward
+      outer = outer->next;  // Move outer pointer forward
     }
     std::cout << "\nDuplicates removed.\n";
   }
@@ -191,10 +191,10 @@ public:
         // Insert the new node after the target node
         // Point new node to the next node of the target
         new_node->next = temp->next;
-        temp->next = new_node; // Point the target node to the new node
+        temp->next = new_node;  // Point the target node to the new node
 
         std::cout << "\nInserted " << value << " after " << target << ".\n";
-        return; // Done inserting, so we return
+        return;  // Done inserting, so we return
       }
       temp = temp->next;
     }

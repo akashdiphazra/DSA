@@ -2,7 +2,7 @@
 #include <memory>
 
 class __DNode__ {
-public:
+ public:
   int data;
   std::shared_ptr<__DNode__> next;
   std::shared_ptr<__DNode__> prev;
@@ -11,11 +11,11 @@ public:
 };
 
 class __Doubly_Linked_List__ {
-private:
+ private:
   std::shared_ptr<__DNode__> head;
   std::shared_ptr<__DNode__> tail;
 
-public:
+ public:
   // Constructor: Initialize an empty list
   __Doubly_Linked_List__() : head(nullptr), tail(nullptr) {}
 
@@ -23,11 +23,11 @@ public:
   void __Insert_Beginning__(int value) {
     std::shared_ptr<__DNode__> new_node = std::make_shared<__DNode__>(value);
     if (!head) {
-      head = tail = new_node; // If the list is empty
+      head = tail = new_node;  // If the list is empty
     } else {
-      new_node->next = head; // Point new node's next to head
-      head->prev = new_node; // Point current head's prev to new node
-      head = new_node;       // Update head to new node
+      new_node->next = head;  // Point new node's next to head
+      head->prev = new_node;  // Point current head's prev to new node
+      head = new_node;        // Update head to new node
     }
   }
 
@@ -35,11 +35,11 @@ public:
   void __Insert_End__(int value) {
     std::shared_ptr<__DNode__> new_node = std::make_shared<__DNode__>(value);
     if (!tail) {
-      head = tail = new_node; // If the list is empty
+      head = tail = new_node;  // If the list is empty
     } else {
-      tail->next = new_node; // Point current tail's next to new node
-      new_node->prev = tail; // Point new node's prev to current tail
-      tail = new_node;       // Update tail to new node
+      tail->next = new_node;  // Point current tail's next to new node
+      new_node->prev = tail;  // Point new node's prev to current tail
+      tail = new_node;        // Update tail to new node
     }
   }
 
@@ -47,10 +47,10 @@ public:
   void __Delete_Beginning__() {
     if (head) {
       if (head == tail) {
-        head = tail = nullptr; // Only one element in the list
+        head = tail = nullptr;  // Only one element in the list
       } else {
-        head = head->next;    // Move head to the next node
-        head->prev = nullptr; // Reset the previous pointer of the new head
+        head = head->next;     // Move head to the next node
+        head->prev = nullptr;  // Reset the previous pointer of the new head
       }
     }
   }
@@ -59,10 +59,10 @@ public:
   void __Delete_End__() {
     if (tail) {
       if (head == tail) {
-        head = tail = nullptr; // Only one element in the list
+        head = tail = nullptr;  // Only one element in the list
       } else {
-        tail = tail->prev;    // Move tail to the previous node
-        tail->next = nullptr; // Disconnect the new tail's next pointer
+        tail = tail->prev;     // Move tail to the previous node
+        tail->next = nullptr;  // Disconnect the new tail's next pointer
       }
     }
   }
@@ -75,13 +75,13 @@ public:
     // Traverse the list and check for the target
     while (current) {
       if (current->data == target) {
-        return index; // Return the index of the found element
+        return index;  // Return the index of the found element
       }
       current = current->next;
       index++;
     }
 
-    return -1; // Return -1 if the target is not found
+    return -1;  // Return -1 if the target is not found
   }
 
   // Reverse the linked list
@@ -93,11 +93,11 @@ public:
     while (current) {
       // Swap the next and prev pointers
       temp = current->next;
-      current->next = current->prev; // Swap next with prev
-      current->prev = temp;          // Swap prev with next
+      current->next = current->prev;  // Swap next with prev
+      current->prev = temp;           // Swap prev with next
 
-      current = temp; // Move to the next node (which is the previous node
-                      // before the swap)
+      current = temp;  // Move to the next node (which is the previous node
+                       // before the swap)
     }
 
     // After the loop, the head and tail need to be swapped
@@ -121,12 +121,12 @@ public:
           if (runner->next) {
             runner->next->prev = runner->prev;
           }
-          runner = runner->next; // Move to the next node
+          runner = runner->next;  // Move to the next node
         } else {
           runner = runner->next;
         }
       }
-      current = current->next; // Move to the next node
+      current = current->next;  // Move to the next node
     }
   }
 
@@ -209,9 +209,9 @@ public:
         if (current == tail) {
           tail = newNode;
         }
-        return; // Exit the function after insertion
+        return;  // Exit the function after insertion
       }
-      current = current->next; // Move to the next node
+      current = current->next;  // Move to the next node
     }
 
     std::cout << "Target value " << targetValue << " not found in the list.\n";
