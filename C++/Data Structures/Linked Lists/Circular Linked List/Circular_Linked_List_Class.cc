@@ -233,6 +233,27 @@ public:
     std::cout << "\nDuplicates removed.\n";
   }
 
+  // Insert node after a given node with target value
+  void __Insert_After__(int targetval, int newval) {
+    if (!head) {
+      std::cout << "\nList is empty. Nothing to insert after.\n";
+      return;
+    }
+
+    __Node__ *temp = head;
+    do {
+      if (temp->data == targetval) {
+        __Node__ *new_node = new __Node__(newval);
+        new_node->next = temp->next; // Point the new node to the next node
+        temp->next = new_node;       // Point the target node to the new node
+        std::cout << "\nInserted " << newval << " after " << targetval << ".\n";
+        return;
+      }
+      temp = temp->next;
+    } while (temp != head);
+
+    std::cout << "\nValue " << targetval << " not found in the list.\n";
+  }
   // Destructor to ensure all dynamically allocated memory is freed
   ~__Circular_Linked_List__() { __Delete_List__(); }
 };

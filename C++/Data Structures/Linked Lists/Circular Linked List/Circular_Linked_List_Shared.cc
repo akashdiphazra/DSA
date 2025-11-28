@@ -218,6 +218,32 @@ public:
     } while (outer != head);
     std::cout << "\nDuplicates removed.\n";
   }
+
+  // Insert node after a node with the specified value
+  void __Insert_After__(int targetval, int newval) {
+    if (!head) {
+      std::cout << "\nList is empty. Nothing to insert after.\n";
+      return;
+    }
+
+    auto temp = head;
+    do {
+      if (temp->data == targetval) {
+        // Found the node with target value, now insert after it
+        auto new_node = std::make_shared<__Node__>(newval);
+        new_node->next =
+            temp->next; // Point the new node to the next node of the target
+        temp->next = new_node; // Link the target node to the new node
+        std::cout << "\nInserted " << newval << " after node with value "
+                  << targetval << ".\n";
+        return;
+      }
+      temp = temp->next;
+    } while (temp !=
+             head); // Loop back to the head to complete the circular list
+
+    std::cout << "\nValue " << targetval << " not found in the list.\n";
+  }
 };
 
 // Main function to demonstrate the CircularLinkedList operations
